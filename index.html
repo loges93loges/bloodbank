@@ -447,37 +447,6 @@ function initBloodDataFetch() {
     });
 }
 
- var Tawk_API = Tawk_API || {},
-      Tawk_LoadStart = new Date();
-
-  (function() {
-      var s1 = document.createElement("script"),
-          s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = 'https://embed.tawk.to/67d5e4743bf812190d8bd665/1imdo8qjs';  <!-- Replace with the correct widget ID -->      s1.charset = 'UTF-8';
-      s1.setAttribute('crossorigin', '*');
-      s0.parentNode.insertBefore(s1, s0);
-  })();
-
-  // When the user sends a message to the Tawk.to widget
-  Tawk_API.onChatMessage = function(message) {
-      // Send message to your backend for AI processing
-      fetch('http://localhost:3000/ask', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: message })
-      })
-      .then(response => response.json())
-      .then(data => {
-          // Send GPT-4 response back to the Tawk.to chat widget
-          Tawk_API.addMessage(data.reply);
-      })
-      .catch(err => {
-          console.error('Error fetching AI response', err);
-      });
-  };
-
-
 </script>
 
 
