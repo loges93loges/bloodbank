@@ -238,7 +238,7 @@
 
  <!-- Chatbot Icon -->
     <div class="chatbot-icon" onclick="toggleChat()">
-        <img src="bot.png" alt="Chat">
+        <img src="assets/bot.png" alt="Chat">
     </div>
 
     <!-- Chat Container -->
@@ -290,7 +290,7 @@ const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-
 
             const profileImage = document.createElement('img');
             profileImage.classList.add('profile-image');
-            profileImage.src = isUser ? 'user.jpg' : 'bot.jpg';
+            profileImage.src = isUser ? 'assets/user.jpg' : 'assets/bot.jpg';
             profileImage.alt = isUser ? 'User' : 'Bot';
 
             const messageContent = document.createElement('div');
