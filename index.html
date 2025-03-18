@@ -253,7 +253,24 @@
             <button id="send-button">Send</button>
         </div>
     </div>
+<!-- Firebase SDK should be loaded before script.js -->
+<script type="module" src="script.js"></script>
 
+<!-- Bell Icon -->
+<!-- Bell Notification Icon -->
+<div class="bell-container">
+    <img src="assets/img4.png" alt="Notifications" class="bell-icon" onclick="togglePopup()">
+    <span id="notification-count">0</span>
+</div>
+
+<!-- Popup for Blood Camps -->
+<div id="campPopup" class="popup">
+    <div class="popup-content">
+        <button onclick="togglePopup()">❌ Close</button>
+        <h3>Registered Blood Camps</h3>
+        <div id="camp-list"></div>
+    </div>
+</div>
     
 <script>
 
