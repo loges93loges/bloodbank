@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Blood Camp</title>
+   <style>
+        /* Import Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Body Background */
+        body {
+            background: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        /* Form Container */
+        .container {
+            margin-bottom: -500px;
+            background: #fff;
+            padding: 35px;
+            width: 500px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Style the Heading */
+        .form-heading {
+            color: #2c3e50;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            position: relative;
+        }
+
+        /* Add a stylish underline */
+        .form-heading::after {
+            content: "";
+            width: 60px;
+            height: 4px;
+            background: #e74c3c;
+            display: block;
+            margin: 8px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Form Group */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        /* Labels */
+        .form-group label {
+            font-weight: 500;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        /* Input Fields */
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1.5px solid #d1d3d6;
+            border-radius: 6px;
+            font-size: 15px;
+            background: #fafafa;
+            transition: 0.3s;
+        }
+
+        /* Input Focus */
+        input:focus, textarea:focus {
+            border-color: #007bff;
+            background: #fff;
+            box-shadow: 0px 3px 8px rgba(0, 123, 255, 0.2);
+            outline: none;
+        }
+
+        /* Textarea */
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        /* Date Input */
+        input[type="date"] {
+            padding: 9px;
+        }
+
+        /* Button Group */
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        /* Buttons */
+        button {
+            width: 48%;
+            padding: 12px;
+            font-size: 15px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            background: #00a349;
+            color: white;
+        }
+
+        .submit-btn:hover {
+            background: #e63333;
+            transform: translateY(-2px);
+        }
+
+        /* Cancel Button */
+        .cancel-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background: #00a349;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                width: 100%;
+                padding: 25px;
+            }
+
+            button {
+                width: 48%;
+            }
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+   </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2 class="form-heading">Register Voluntary Blood Camp</h2>
+        <form id="campForm">
+            <div class="form-group">
+                <label for="organizationName">Organization Name</label>
+                <input type="text" id="organizationName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="organizerName">Organizer Name</label>
+                <input type="text" id="organizerName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mobileNumber">Organizer Mobile Number</label>
+                <input type="tel" id="mobileNumber" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Organizer Email ID</label>
+                <input type="email" id="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="campName">Camp Name</label>
+                <input type="text" id="campName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="campAddress">Camp Address</label>
+                <textarea id="campAddress" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="state">State</label>
+                <input type="text" id="state" required>
+            </div>
+
+            <div class="form-group">
+                <label for="district">District</label>
+                <input type="text" id="district" required>
+            </div>
+
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" required>
+            </div>
+
+            <div class="form-group">
+                <label for="startDate">Camp Start Date</label>
+                <input type="date" id="startDate" required>
+            </div>
+
+            <div class="form-group">
+                <label for="endDate">Camp End Date</label>
+                <input type="date" id="endDate" required>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="submit-btn">Submit</button>
+                <button type="button" class="cancel-btn" onclick="document.getElementById('campForm').reset();">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+
+    <script type="module">
+       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
+
+// Firebase Configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCft2x1RtggYhMJ_YzQI8j0QwDWkxHbDKY",
+  authDomain: "bloodlink-de41e.firebaseapp.com",
+  projectId: "bloodlink-de41e",
+  storageBucket: "bloodlink-de41e.firebasestorage.app",
+  messagingSenderId: "857063136838",
+  appId: "1:857063136838:web:230e4953530a447306b447"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Form Submission
+document.getElementById("campForm").addEventListener("submit", async (event) => {
+    event.preventDefault(); // Prevent page reload
+
+    // Get input values
+    const campData = {
+        organizationName: document.getElementById("organizationName").value,
+        organizerName: document.getElementById("organizerName").value,
+        mobileNumber: document.getElementById("mobileNumber").value,
+        emailID: document.getElementById("email").value,
+        campName: document.getElementById("campName").value,
+        campAddress: document.getElementById("campAddress").value,
+        state: document.getElementById("state").value,
+        district: document.getElementById("district").value,
+        city: document.getElementById("city").value,
+        startDate: document.getElementById("startDate").value,
+        endDate: document.getElementById("endDate").value,
+        timestamp: new Date().toISOString() // Store timestamp for sorting
+    };
+
+    try {
+        await addDoc(collection(db, "campRegistered"), campData);
+        alert("Blood Camp Registered Successfully!");
+        document.getElementById("campForm").reset(); // Clear form
+    } catch (error) {
+        console.error("Error adding document: ", error);
+        alert("Error registering blood camp.");
+    }
+});
+
+    </script>
+    
+</body>
+</html>
