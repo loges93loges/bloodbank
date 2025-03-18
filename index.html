@@ -390,24 +390,29 @@ function initTypingEffect() {
     const delayBetweenLoops = 1000;
     const logoElement = document.getElementById("logo");
 
-    function typeText() {
-        logoElement.innerHTML = "";
-        let index = 0;
+    if (!logoElement) return; // Prevent errors if element is missing
 
-        function writeText() {
-            if (index < text.length) {
-                logoElement.innerHTML += text.charAt(index);
-                index++;
-                setTimeout(writeText, speed);
-            } else {
-                setTimeout(typeText, delayBetweenLoops);
-            }
+    let index = 0;
+
+    function typeText() {
+        if (index < text.length) {
+            logoElement.innerHTML += text.charAt(index);
+            index++;
+            setTimeout(typeText, speed);
+        } else {
+            setTimeout(() => {
+                logoElement.innerHTML = ""; // Clear text before restart
+                index = 0;
+                typeText();
+            }, delayBetweenLoops);
         }
-        writeText();
     }
 
     typeText();
 }
+
+document.addEventListener("DOMContentLoaded", initTypingEffect);
+
 
 // Carousel Effect
     let currentSlide = 0;
