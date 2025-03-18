@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Requests</title>
+
+    <script type="module" src="notifications.js"></script>
+</head>
+<style>
+    body {
+font-family: 'Poppins', sans-serif;
+background-color: #f4f7fc;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+height: 100vh;
+margin: 0;
+}
+
+.container {
+width: 90%;
+max-width: 600px;
+background: white;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+text-align: center;
+}
+
+h1 {
+color: #D32F2F;
+font-size: 24px;
+margin-bottom: 15px;
+}
+
+.notifications-list {
+display: flex;
+flex-direction: column;
+gap: 15px;
+margin-top: 10px;
+}
+
+.notification-item {
+background: #fff3f3;
+padding: 15px;
+border-radius: 8px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+text-align: left;
+}
+
+.notification-item h3 {
+color: #D32F2F;
+font-size: 18px;
+margin-bottom: 5px;
+}
+
+.notification-item p {
+color: #333;
+font-size: 14px;
+margin: 3px 0;
+}
+
+</style>
+<body>
+    <div class="container">
+        <h1>Blood Requests</h1>
+        <div id="notifications-container" class="notifications-list">
+            <p>Loading blood requests...</p>
+        </div>
+    </div>
+</body>
+</html>

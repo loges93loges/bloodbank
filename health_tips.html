@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Tips & Blog - BloodLink</title>
+   
+    <style>
+body {
+font-family: 'Arial', sans-serif;
+background-color: #f0f8ff;
+color: #333;
+margin: 0;
+padding: 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.main-heading {
+background-color: #d32f2f;
+color: #fff;
+padding: 15px 30px;
+border-radius: 8px;
+text-align: center;
+margin-top: 30px;
+width: 90%;
+max-width: 600px;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.blog-container {
+width: 90%;
+max-width: 800px;
+margin-top: 20px;
+}
+
+.blog-item {
+background: #ffffff;
+border: 2px solid #d32f2f;
+border-left: 6px solid #d32f2f;
+border-radius: 12px;
+padding: 15px;
+margin-bottom: 10px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+color: #b71c1c;
+cursor: pointer;
+font-size: 20px;
+margin: 0;
+padding: 10px 0;
+transition: color 0.3s ease;
+}
+
+.subtitle:hover {
+color: #d32f2f;
+}
+
+.content {
+padding-top: 10px;
+}
+
+ul {
+list-style: none;
+padding: 0;
+}
+
+li {
+position: relative;
+margin: 8px 0;
+padding-left: 28px;
+}
+
+li::before {
+content: "✔️";
+position: absolute;
+left: 0;
+color: #4caf50;
+font-size: 18px;
+}
+
+a {
+display: inline-block;
+background-color: #d32f2f;
+color: #ffffff;
+padding: 10px 20px;
+text-decoration: none;
+border-radius: 6px;
+margin-top: 20px;
+transition: background 0.3s ease;
+}
+
+a:hover {
+background-color: #b71c1c;
+}
+
+
+   </style>
+</head>
+<body>
+    <h1 class="main-heading">Health Tips & Blog Section</h1>
+
+    <div class="blog-container">
+
+        <!-- Blood Donation Benefits -->
+        <div class="blog-item">
+            <h2 class="subtitle" onclick="toggleContent('bloodDonation')">🩸 Why Donate Blood? ➕</h2>
+            <div id="bloodDonation" class="content" style="display: none;">
+                <p>Blood donation is a simple act that saves lives. It is crucial for patients facing:</p>
+                <ul>
+                    <li>**Severe Trauma Injuries** from accidents or disasters.</li>
+                    <li>**Surgical Procedures** requiring significant blood loss replacement.</li>
+                    <li>**Cancer Treatments** where chemotherapy weakens the blood cells.</li>
+                    <li>**Anemia Patients** who require frequent transfusions.</li>
+                    <li>**Pregnancy Complications** involving excessive blood loss.</li>
+                </ul>
+                <p><strong>Did you know?</strong> Every 2 seconds, someone in the world needs blood.</p>
+            </div>
+        </div>
+
+        <!-- Blood Types and Compatibility -->
+        <div class="blog-item">
+            <h2 class="subtitle" onclick="toggleContent('bloodTypes')">🧪 Blood Types & Compatibility ➕</h2>
+            <div id="bloodTypes" class="content" style="display: none;">
+                <p>Knowing your blood type is crucial in emergencies. Here's a guide:</p>
+                <ul>
+                    <li>**O- (Universal Donor):** Can donate to any blood type.</li>
+                    <li>**AB+ (Universal Recipient):** Can receive any blood type.</li>
+                    <li>**A+ & A-:** Compatible with A and O types.</li>
+                    <li>**B+ & B-:** Compatible with B and O types.</li>
+                    <li>**Rh Factor:** A crucial protein determining positive (+) or negative (-) blood types.</li>
+                </ul>
+                <p><strong>Important:</strong> Blood type mismatch can cause life-threatening reactions.</p>
+            </div>
+        </div>
+
+        <!-- Plasma and Platelet Information -->
+        <div class="blog-item">
+            <h2 class="subtitle" onclick="toggleContent('plasmaPlatelet')">🟠 Plasma & Platelets ➕</h2>
+            <div id="plasmaPlatelet" class="content" style="display: none;">
+                <p>Plasma and platelets are vital for:</p>
+                <ul>
+                    <li>**Burn Victims:** Plasma restores lost proteins and nutrients.</li>
+                    <li>**Cancer Patients:** Platelets control bleeding during treatments.</li>
+                    <li>**Organ Transplants:** Plasma ensures the body accepts the new organ.</li>
+                </ul>
+                <p><strong>Did you know?</strong> Plasma donations can help 2-3 patients from a single donation.</p>
+            </div>
+        </div>
+
+        <!-- Blood Pressure Management -->
+        <div class="blog-item">
+            <h2 class="subtitle" onclick="toggleContent('bloodPressure')">🫀 Blood Pressure Management ➕</h2>
+            <div id="bloodPressure" class="content" style="display: none;">
+                <p>Maintaining healthy blood pressure prevents heart attacks and strokes:</p>
+                <ul>
+                    <li>**120/80 mmHg** is considered the ideal blood pressure.</li>
+                    <li>**High BP Risks:** Stroke, kidney failure, and vision loss.</li>
+                    <li>**Low BP Risks:** Dizziness, fainting, and shock.</li>
+                    <li>**Control Tips:** Eat less salt, stay active, and manage stress effectively.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- First Aid for Blood Loss -->
+        <div class="blog-item">
+            <h2 class="subtitle" onclick="toggleContent('firstAid')">🚑 First Aid for Blood Loss ➕</h2>
+            <div id="firstAid" class="content" style="display: none;">
+                <p>In emergencies involving severe bleeding:</p>
+                <ul>
+                    <li>**Apply Firm Pressure** with a clean cloth directly on the wound.</li>
+                    <li>**Keep the Injured Area Elevated** to slow bleeding.</li>
+                    <li>**Do NOT Remove Objects** lodged in the wound — wrap them instead.</li>
+                    <li>**Call Emergency Services Immediately.**</li>
+                </ul>
+                <p><strong>Quick Response Saves Lives!</strong></p>
+            </div>
+        </div>
+
+        <!-- Foods that Boost Blood Health -->
+        <div class="blog-item">
+            <h2 class="subtitle" onclick="toggleContent('healthyEating')">🥗 Foods that Boost Blood Health ➕</h2>
+            <div id="healthyEating" class="content" style="display: none;">
+                <p>Eating the right foods helps maintain healthy blood levels:</p>
+                <ul>
+                    <li>**Iron-Rich Foods:** Spinach, red meat, and lentils prevent anemia.</li>
+                    <li>**Vitamin B12 Sources:** Eggs, fish, and dairy products support nerve function.</li>
+                    <li>**Folic Acid Foods:** Beans, avocado, and leafy greens support red blood cell production.</li>
+                    <li>**Hydration:** Drinking enough water ensures better blood circulation.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Mental & Emotional Well-being -->
+        <div class="blog-item">
+            <h2 class="subtitle" onclick="toggleContent('mentalHealth')">🧠 Mental Well-being & Blood Health ➕</h2>
+            <div id="mentalHealth" class="content" style="display: none;">
+                <p>Emotional health impacts blood pressure, heart rate, and overall immunity:</p>
+                <ul>
+                    <li>**Mindfulness & Meditation** reduce stress hormones that affect the heart.</li>
+                    <li>**Positive Social Interaction** improves mental well-being and heart health.</li>
+                    <li>**Avoid Excessive Screen Time** to reduce anxiety and eye strain.</li>
+                </ul>
+            </div>
+        </div>
+
+        <a href="index.html">⬅️ Back to Home</a>
+    </div>
+
+    <script>
+        function toggleContent(sectionId) {
+            const content = document.getElementById(sectionId);
+            const subtitle = content.previousElementSibling;
+
+            if (content.style.display === "none") {
+                content.style.display = "block";
+                subtitle.innerHTML = subtitle.innerHTML.replace("➕", "➖");
+            } else {
+                content.style.display = "none";
+                subtitle.innerHTML = subtitle.innerHTML.replace("➖", "➕");
+            }
+        }
+    </script>
+</body>
+</html>

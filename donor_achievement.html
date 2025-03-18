@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Achievement Badges</title>
+    <script type="module" src="donationHistory.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f7f7f7, #ffe0e0);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            color: #d32f2f;
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 10px 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .donation-badge {
+    text-align: center;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Ensures content (image and text) are centered */
+    justify-content: center;
+}
+
+.badge-image {
+    width: 50px;  /* Adjust the size of the image (smaller width) */
+    height: auto;   /* Maintains aspect ratio */
+    margin-bottom: 10px;
+}
+ 
+
+        .badge {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #c90000;
+        }
+
+        .badge:last-child {
+            border-bottom: none;
+        }
+
+        .badge-row {
+    text-align: center;
+}
+
+.badge-row {
+    text-align: center;
+}
+
+.badge-container img {
+    border-radius: 50px;
+    width: 100px;  /* Adjust the size of the image (100px width as example) */
+    height: auto;  /* Maintains the aspect ratio of the image */
+    margin-bottom: 10px;
+    display: block;
+    margin-left: 90px;
+
+}
+
+
+        a {
+            text-decoration: none;
+            background-color: #d32f2f;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #b71c1c;
+        }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .donation-badge {
+    text-align: center;
+    margin: 20px;
+}
+.badge-container p{
+    color: #b71c1c;
+    margin-left: 10px;
+}
+
+    </style>
+</head>
+<body>
+
+    <h1>Donation History</h1>
+    <table>
+        <thead>
+            <tr>
+
+                <th>Requestor Name</th>
+                <th>Requestor Address</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody id="history-data">
+            <!-- Data will be dynamically added here -->
+        </tbody>
+    </table>
+    
+
+
+    <h1>🎖️ Donor Achievement Badges</h1>
+    <div class="badge-container">
+        <div class="badge">
+            <img src="assets/bronze.jpg" alt="5th Donation Badge">
+            <div class="badge-info">
+                <strong>5th Donation Milestone</strong>
+                <p>Awarded for reaching 5 successful blood donations. Your dedication is life-saving!</p>
+            </div>
+        </div>
+
+        <div class="badge">
+            <img src="assets/silver.jpg" alt="10th Donation Badge">
+            <div class="badge-info">
+                <strong>10th Donation Milestone</strong>
+                <p>Awarded for reaching 10 successful donations. You're a true hero!</p>
+            </div>
+        </div>
+
+        <div class="badge">
+            <img src="assets/gold.jpg" alt="20th Donation Badge">
+            <div class="badge-info">
+                <strong>20th Donation Milestone</strong>
+                <p>Awarded for reaching 20 successful donations. Your impact is extraordinary!</p>
+            </div>
+        </div>
+    </div>
+    <div id="badges-section" class="badge-container">
+        <!-- Badge images will appear here based on the donation count -->
+    </div>
+    <a href="index.html">⬅️ Back to Home</a>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+
+// Firebase Configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyCft2x1RtggYhMJ_YzQI8j0QwDWkxHbDKY",
+    authDomain: "bloodlink-de41e.firebaseapp.com",
+    projectId: "bloodlink-de41e",
+    storageBucket: "bloodlink-de41e.firebasestorage.app",
+    messagingSenderId: "857063136838",
+    appId: "1:857063136838:web:230e4953530a447306b447"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function displayDonationHistory() {
+    const historyTable = document.getElementById("history-data");
+    historyTable.innerHTML = ""; // Clear previous content
+
+    const badgesSection = document.getElementById("badges-section");
+    badgesSection.innerHTML = ""; // Clear previous badges
+
+    try {
+        const donorsRef = collection(db, "donors");
+        const querySnapshot = await getDocs(donorsRef);
+
+        querySnapshot.forEach((doc) => {
+            const donor = doc.data();
+
+            // Get the donation count from the donor data
+            const donationCount = donor.donationCount || 0;
+
+            // Display donation history
+            if (donor.donationHistory) {
+                donor.donationHistory.forEach((donation, index) => {
+                    const row = `
+                        <tr>
+              
+                            <td>${donation.requestorName || 'N/A'}</td>
+                            <td>${donation.requestorAddress || 'N/A'}</td>
+                            <td>${donation.date || 'N/A'}</td>
+                        </tr>
+                    `;
+                    historyTable.innerHTML += row;
+                });
+            }
+
+            // Display badge based on donation count
+            if (donationCount >= 5 && donationCount < 10) {
+                badgesSection.innerHTML = `
+                    <div class="badge">
+                        <img src="assets/bronze.jpg" alt="Bronze Badge">
+                    </div>
+                    <p>5th Donation Milestone - Bronze Badge</p>
+                `;
+            } else if (donationCount >= 10 && donationCount < 20) {
+                badgesSection.innerHTML = `
+                    <div class="badge">
+                        <img src="assets/silver.jpg" alt="Silver Badge">  
+                    </div>
+                    <p>10th Donation Milestone - Silver Badge</p>
+                `;
+            } else if (donationCount >= 20) {
+                badgesSection.innerHTML = `
+                    <div class="badge">
+                        <img src="assets/gold.jpg" alt="Gold Badge">
+                    </div>
+                    <p>20th Donation Milestone - Gold Badge</p>
+                `;
+            }
+        });
+    } catch (error) {
+        console.error("❌ Error fetching donation history:", error);
+    }
+}
+
+// Load data when the page loads
+window.addEventListener("DOMContentLoaded", displayDonationHistory);
+
+</script>
+</body>
+</html>

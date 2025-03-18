@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Bank Directory</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f8fc;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #D32F2F;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .search-box {
+            background-color: #fff;
+            border: 2px solid #D32F2F;
+            border-radius: 12px;
+            padding: 20px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        label, select, button {
+            margin: 5px 0;
+            width: 100%;
+        }
+        select, button {
+            padding: 10px;
+            border: 1px solid #D32F2F;
+            border-radius: 5px;
+            background-color: #fff;
+            cursor: pointer;
+        }
+        button {
+            background-color: #D32F2F;
+            color: #fff;
+            border: none;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #b71c1c;
+        }
+        table {
+            width: 100%;
+            max-width: 1000px;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #D32F2F;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f2dede;
+        }
+        a.map-link {
+            color: #D32F2F;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a.map-link:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            table, th, td {
+                font-size: 14px;
+            }
+            .search-box {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+            }
+            .search-box {
+                padding: 15px;
+            }
+            table, th, td {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Search for Blood Bank</h1>
+
+    <div class="search-box">
+        <label for="state">State:</label>
+        <select id="state" onchange="populateDistricts()">
+            <option value="">Select State</option>
+        </select>
+
+        <label for="district">District:</label>
+        <select id="district">
+            <option value="">Select District</option>
+        </select>
+
+        <button onclick="searchBloodBanks()">Search</button>
+    </div>
+
+    <table id="resultTable">
+        <thead>
+            <tr>
+                <th>S. No</th>
+                <th>Blood Bank Name</th>
+                <th>City</th>
+                <th>Address</th>
+                <th>Contact Number</th>
+                <th>Email</th>
+                <th>Pincode</th>
+            </tr>
+        </thead>
+        <tbody id="resultBody">
+            <!-- Results will be displayed here -->
+        </tbody>
+    </table>
+
+    <script>
+        let bloodBankData = {};
+
+        // Fetch JSON data
+        async function fetchData() {
+            const response = await fetch('data.json');
+            bloodBankData = await response.json();
+
+            const stateDropdown = document.getElementById('state');
+
+            for (const state in bloodBankData) {
+                const option = document.createElement('option');
+                option.value = state;
+                option.textContent = state;
+                stateDropdown.appendChild(option);
+            }
+        }
+
+        // Populate district dropdown
+        function populateDistricts() {
+            const selectedState = document.getElementById('state').value;
+            const districtDropdown = document.getElementById('district');
+
+            districtDropdown.innerHTML = '<option value="">Select District</option>';
+
+            if (bloodBankData[selectedState]) {
+                const districts = Object.keys(bloodBankData[selectedState]);
+                districts.forEach(district => {
+                    const option = document.createElement('option');
+                    option.value = district;
+                    option.textContent = district;
+                    districtDropdown.appendChild(option);
+                });
+            }
+        }
+
+        // Search and display blood banks
+        function searchBloodBanks() {
+            const selectedState = document.getElementById('state').value;
+            const selectedDistrict = document.getElementById('district').value;
+            const resultBody = document.getElementById('resultBody');
+
+            resultBody.innerHTML = '';
+
+            if (!selectedState || !selectedDistrict) {
+                resultBody.innerHTML = '<tr><td colspan="7">Please select both State and District.</td></tr>';
+                return;
+            }
+
+            const bloodBanks = bloodBankData[selectedState][selectedDistrict];
+
+            if (!bloodBanks || bloodBanks.length === 0) {
+                resultBody.innerHTML = '<tr><td colspan="7">No results found.</td></tr>';
+                return;
+            }
+
+            bloodBanks.forEach((bank, index) => {
+                const encodedAddress = encodeURIComponent(bank._address || bank.address);
+
+                const row = `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${bank._blood_bank_name || bank.blood_bank_name}</td>
+                        <td>${bank._city || bank.city}</td>
+                        <td>
+                            <a href="https://www.google.com/maps/search/?api=1&query=${encodedAddress}" 
+                               target="_blank"
+                               class="map-link">
+                               ${bank._address || bank.address}
+                            </a>
+                        </td>
+                        <td>${bank._contact_no || bank.contact_no}</td>
+                        <td>${bank._email || bank.email || 'N/A'}</td>
+                        <td>${bank.pincode || 'N/A'}</td>
+                    </tr>
+                `;
+                resultBody.innerHTML += row;
+            });
+        }
+
+        // Load data on page load
+        window.onload = fetchData;
+    </script>
+</body>
+</html>

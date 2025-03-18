@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Nearby Hospitals</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        #map {
+            height: 400px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        input, button {
+            margin: 5px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Find Nearby Hospitals</h1>
+    <div>
+        <input type="text" id="locationInput" placeholder="Enter your city or location">
+        <button onclick="findHospitals()">Search</button>
+        <button onclick="getUserLocation()">Use My Location</button>
+    </div>
+    <div id="map"></div>
+
+    <script>
+        function initMap() {
+            window.map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 20.5937, lng: 78.9629 }, // Default India location
+                zoom: 5
+            });
+        }
+
+        async function findHospitals() {
+            const location = document.getElementById('locationInput').value.trim();
+            if (!location) {
+                alert("Please enter a location.");
+                return;
+            }
+
+            const geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ address: location }, (results, status) => {
+                if (status === 'OK') {
+                    const position = results[0].geometry.location;
+                    map.setCenter(position);
+                    map.setZoom(13);
+
+                    const service = new google.maps.places.PlacesService(map);
+                    service.nearbySearch({
+                        location: position,
+                        radius: 5000,
+                        type: ['hospital']
+                    }, displayResults);
+                } else {
+                    alert("Location not found");
+                }
+            });
+        }
+
+        function getUserLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    const userPosition = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    map.setCenter(userPosition);
+                    map.setZoom(13);
+
+                    const service = new google.maps.places.PlacesService(map);
+                    service.nearbySearch({
+                        location: userPosition,
+                        radius: 5000,
+                        type: ['hospital']
+                    }, displayResults);
+                }, () => {
+                    alert("Geolocation failed. Please enter a location manually.");
+                });
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function displayResults(results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                results.forEach(place => {
+                    const marker = new google.maps.Marker({
+                        position: place.geometry.location,
+                        map: map,
+                        title: place.name
+                    });
+                });
+            } else {
+                alert("No hospitals found in this area.");
+            }
+        }
+    </script>
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNNo60xIpeoIu6VkK9FfwUb_Pmj8mb990&libraries=places&callback=initMap">
+    </script>
+    
+</body>
+</html>

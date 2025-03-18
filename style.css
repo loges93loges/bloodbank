@@ -1,0 +1,699 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container a{
+    text-decoration: none;
+
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+/* Navbar styles */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #c2185b;
+}
+
+/* Logo - BloodLink with Typing Effect */
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+/* Navbar Menu */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+
+.nav-links a:hover {
+    transition: background 0.6s ease;
+    color: #f5a623;
+}
+
+/* Dropdown Menu Styling */
+.dropdown {
+    position: relative; 
+    padding-left: 10px; /* Adds spacing between "In Need of Blood" and the submenu */
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; /* Appears below the main menu */
+    left: 0;
+    background-color: #c2185b;
+    list-style: none;
+    width: 220px; /* Set width for better spacing */
+    padding: 10px 10; /* Adds vertical spacing inside the submenu */
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10; /* Ensures submenu appears on top */
+}
+
+.dropdown-menu li {
+    padding: 12px 20px; /* Improved spacing */
+}
+
+.dropdown-menu li:last-child {
+    border-bottom: none;
+}
+
+.dropdown-menu a {
+    color: #fff;
+    margin-left: 7px;
+    text-decoration: none;
+    display: block;
+    transition: background 0.6s ease;
+}
+
+.dropdown-menu a:hover {
+    transition: background 0.6s ease;
+    background-color: #f5a623;
+    color: #fff;
+}
+
+/* Show submenu on hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+
+
+
+
+
+/* Highlight Login and Signup */
+.login-signup {
+    background-color: #f5a623;
+    color: #fff;
+    border: 2px solid #f5a623;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.login-signup:hover {
+    background-color: white;
+    color: #f5a623;
+    border: 2px solid #f5a623;
+}
+
+/* Carousel Container */
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    height: 455px;  /* Fixed height for consistent size */
+    margin: 40px auto;
+    overflow: hidden;
+    border: 2px solid #c2185b;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;  
+    height: 100%;  
+    opacity: 0;  /* Hides all slides by default */
+    visibility: hidden;  /* Ensures they are non-interactable */
+    transition: opacity 0.8s ease-in-out;
+}
+
+.carousel-slide.active {
+    opacity: 1;  /* Only the active slide is visible */
+    visibility: visible;
+    z-index: 1;  /* Ensures active slide appears above */
+}
+
+.carousel-slide:first-child {
+    display: block; /* Show the first slide initially */
+}
+
+/* Info Container */
+.info-container {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* Image on Left Side */
+.info-image img {
+    width: 100%;
+    height: 410px;
+    max-width: 300px;
+
+}
+
+/* Content on Right Side */
+.info-content {
+    flex: 1;
+    text-align: left;
+}
+
+.info-content h2 {
+    color: #c2185b;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.info-content p {
+    color: #333;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.donate-btn {
+    display: inline-block;
+    background-color: #c2185b;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.donate-btn:hover {
+    background-color: #f5a623;
+}
+
+/* Animation Effect */
+@keyframes fadeEffect {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .info-container {
+        flex-direction: column; /* Stack image & content vertically */
+        text-align: center;
+    }
+
+    .info-image img {
+        max-width: 100%;
+    }
+
+    .info-content {
+        text-align: center;
+    }
+}
+
+
+
+.signup-box h2 {
+    color: #c2185b;
+    margin-bottom: 20px;
+}
+/* Input Fields */
+.input-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #c2185b;
+    border-radius: 5px;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    background-color: #c2185b;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #f5a623;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: #c2185b;
+    cursor: pointer;
+}
+
+/* Animations */
+@keyframes slideDown {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        background-color: #c2185b;
+        padding: 20px 0;
+        text-align: center;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
+        cursor: pointer;
+        font-size: 28px;
+        color: white;
+    }
+}
+
+@media (min-width: 769px) {
+    .hamburger {
+        display: none;
+    }
+}
+
+/* Responsive Dropdown for Mobile */
+@media (max-width: 768px) {
+    .dropdown-menu {
+        position: static;
+        width: 100%;
+        display: none; /* Initially hidden */
+    }
+
+    .dropdown.active .dropdown-menu {
+        display: block;
+    }
+}
+
+
+/* Contact Us Section */
+.contact-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 40px 30px;
+    background-color: #fff;
+    border: 3px solid #c2185b;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Heading */
+.contact-container h2 {
+    color: #c2185b;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 32px;
+}
+
+/* Contact Details Section */
+.contact-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.contact-item {
+    flex: 1 1 calc(33.333% - 30px); /* Three items per row on large screens */
+    min-width: 250px;
+    background-color: #fbe9e7;
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid #c2185b;
+    text-align: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contact-item h3 {
+    color: #f5a623;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.contact-item p {
+    color: #333;
+    font-size: 16px;
+}
+
+/* Contact Form */
+.contact-form {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    border: 2px solid #c2185b;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    color: #c2185b;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #c2185b;
+    border-radius: 6px;
+    outline: none;
+    font-size: 16px;
+    background-color: #fff;
+}
+
+.input-group textarea {
+    resize: none;
+    height: 120px;
+}
+
+/* Submit Button */
+button {
+    width: 100%;
+    background-color: #c2185b;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #f5a623;
+}
+/* Contact Details Section */
+.contact-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.contact-item {
+    flex: 1 1 calc(33.333% - 30px);  /* Default size */
+    min-width: 250px;
+    background-color: #fbe9e7;
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid #c2185b;
+    text-align: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease; /* Smooth size transition */
+}
+
+/* Shrink other items when one is hovered */
+.contact-details:hover .contact-item {
+    flex: 1;  /* Shrinks all items */
+    opacity: 0.7; /* Dim non-hovered items */
+}
+
+.contact-item:hover {
+    flex: 2;  /* Expands the hovered item */
+    opacity: 1; /* Full visibility for hovered item */
+    transform: scale(1.05); /* Slight zoom for emphasis */
+    background-color: #ffcdd2; /* Soft highlight */
+}
+
+/* Heading */
+.contact-item h3 {
+    color: #f5a623;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.contact-item p {
+    color: #333;
+    font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contact-details {
+        flex-direction: column;
+    }
+
+    .contact-item {
+        flex: 1 1 100%;  /* Full width for smaller screens */
+    }
+}
+
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .contact-item {
+        flex: 1 1 calc(50% - 30px); /* Two items per row on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-container {
+        padding: 30px 20px;
+    }
+
+    .contact-details {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .contact-item {
+        width: 100%; /* Full width for smaller devices */
+    }
+
+    .contact-container h2 {
+        font-size: 26px;
+    }
+
+    .input-group input,
+    .input-group textarea {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-container h2 {
+        font-size: 22px;
+    }
+
+    .contact-item h3 {
+        font-size: 18px;
+    }
+}
+/* Blood Availability Section */
+#blood-search-section {
+    margin: 40px auto;
+    padding: 20px;
+    max-width: 700px;
+    background-color: #fff;
+    border: 2px solid #c2185b;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Form Styling */
+#bloodSearchForm .form-group {
+    margin-bottom: 15px;
+}
+
+#bloodSearchForm label {
+    display: block;
+    color: #c2185b;
+    margin-bottom: 5px;
+}
+
+#bloodSearchForm input,
+#bloodSearchForm select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #c2185b;
+    border-radius: 5px;
+    outline: none;
+}
+
+#bloodSearchForm button {
+    width: 100%;
+    background-color: #c2185b;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#bloodSearchForm button:hover {
+    background-color: #f5a623;
+}
+
+/* Table Styling */
+#bloodDataTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#bloodDataTable th, #bloodDataTable td {
+    border: 1px solid #c2185b;
+    padding: 10px;
+    text-align: center;
+}
+
+#bloodDataTable th {
+    background-color: #c2185b;
+    color: #fff;
+}
+
+#bloodDataTable tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#bloodDataTable tbody tr:hover {
+    background-color: #f5a623;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+
+        .container{
+          margin-left: 250px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 1000px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .block{
+            padding: 50px;
+            text-align: center;
+            color: #fff;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+#dateDisplay{
+    visibility: hidden;
+}
+        .large-block {
+          max-width: 350px;
+            flex: 1;
+        }
+
+        .small-block {
+            flex: 1;
+            max-width: 150px;
+            max-height: 150px;
+        }
+
+        .blue { background-color: #0078FF; }
+        .purple { background-color: #673AB7; }
+        .red { background-color: #D32F2F; }
+        .light-blue { background-color: #03A9F4; }
+        .yellow { background-color: #FFC107; }
+        .orange { background-color: #FF5722; }
+        .green { background-color: #4CAF50; }
+
+        /* HOVER EFFECTS */
+        .container:hover .block {
+            transform: scale(0.8); /* Reduce size for non-hovered */
+        }
+
+        .block:hover {
+            transform: scale(1); /* Scale up hovered container */
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .block {
+                width: 100%;
+            }
+
+            .small-block {
+                max-width: 100%;
+            }
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .last-update{
+          margin-left: 340px;
+        }
+        
+      #dateDisplay {
+            font-family: Arial, sans-serif;
+            margin-left: 415px;
+        }
+
+        .bold-text {
+          font-size: 11px;
+            font-weight: bold;
+            color: #c2185b;
+        }
+
+        .normal-text {
+          font-size: 11px;
+            font-weight: normal;
+            color: #c2185b;
+        }

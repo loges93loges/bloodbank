@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloodLink</title>
+    <link rel="stylesheet" href="style.css">
+   
+</head>
+
+<body>
+
+    <nav>
+    <div class="logo" id="logo"></div>
+    <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+
+        <!-- In Need of Blood with Submenu -->
+        <li class="dropdown">
+            <a href="#">In Need of Blood ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="request_blood.html"> Request Blood</a></li>
+                <li><a href="notification.html">  Notification</a></li>
+                <li><a href="findnearbyhospital.html">  Find Nearby Hospital</a></li> 
+                <li><a href="#">  Track Blood</a></li>
+                <li><a href="#">  Call & Chat</a></li>
+            </ul>
+        </li>
+
+         <!-- Donate Blood with Submenu -->
+        <li class="dropdown">
+            <a href="#">Donate Blood ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="register.html">  Register</a></li>
+                <li><a href="notifications.html">  Notification</a></li>
+                <li><a href="#">  Eligibility Criteria</a></li>
+                <li><a href="#">  Donation History</a></li>
+                <li><a href="#">  Nearby Blood Bank</a></li>
+                <li><a href="#">  Call & Chat</a></li>
+            </ul>
+        </li>
+
+        <li><a href="#contact-section">Contact Us</a></li>
+        <li><a href="login.html" class="login-signup">Login</a></li>
+        <li><a href="signup.html" class="login-signup">Sign Up</a></li>
+        
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+</nav>
+
+
+
+
+
+
+ <!-- Carousel Container -->
+    <div class="carousel-container">
+        <div class="carousel-slide">
+            <div class="info-container">
+                <div class="info-image">
+                    <img src="assets/img1.jpeg" alt="Blood Donation Image">
+                </div>
+                <div class="info-content">
+                    <h2>Be a Lifesaver Today!</h2>
+                    <p>Your blood donation can bring hope to someone in need. Every drop counts, and your kindness can save lives.</p>
+                    <a href="#" class="donate-btn">Donate Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-slide">
+            <div class="info-container">
+                <div class="info-content">
+                    <h2>Donate Blood, Save Lives!</h2>
+                    <p>Every pint of blood donated gives someone another chance at life. Be the hero someone needs today.</p>
+                    <a href="#" class="donate-btn">Get Involved</a>
+                </div>
+                  <div class="info-image">
+                    <img src="assets/img2.jpeg" alt="Blood Donation Image">
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-slide">
+            <div class="info-container">
+                <div class="info-image">
+                    <img src="assets/img3.jpeg" alt="Blood Donation Image">
+                </div>
+                <div class="info-content">
+                    <h2>Your Blood, Their Hope!</h2>
+                    <p>Help us bridge the gap between those in need and generous donors like you. Act now, save lives!</p>
+                    <a href="#" class="donate-btn">Join Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+ <h1>Blood Bank Information</h1><br>
+<div id="dateDisplay"></div><br>
+    <div class="container">
+        <a href="donor_achievement.html">
+        <div class="block large-block blue">Donors Registered: <br> 6,927,828</div>
+    </a>
+        <a href="donor_achievement.html">
+            <div class="block large-block purple">Blood Units Collected</div>
+        </a>
+        
+    </div>
+    
+<br>
+    <div class="container">
+        <a href="health_tips.html" target="_self">
+        <div class="block small-block red">Blood Availability Search</div> 
+    </a>
+    <a href="demo.html" target="_self">
+        <div class="block small-block light-blue">Blood Bank Directory</div>
+    </a>
+    <a href="health_tips.html" target="_self">
+        <div class="block small-block yellow">Blood Donation Camps</div>
+    </a>
+        <a href="health_tips.html" target="_self">
+            <div class="block small-block orange">Donor Login</div>
+        </a>
+        
+        <a href="health_tips.html" target="_self">
+        <div class="block small-block green">Register Voluntary Blood Camp</div>
+        <a href="health_tips.html" target="_self">
+
+    </div>
+
+
+<!-- Blood Availability Search Section -->
+<section id="blood-search-section">
+    <h2>Blood Availability Search</h2>
+    <br><br>
+    <!-- Search Form -->
+    <form id="bloodSearchForm">
+        <div class="form-group">
+            <label for="state">State</label>
+            <input type="text" id="state" placeholder="Enter State" required>
+        </div>
+
+        <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" id="city" placeholder="Enter City" required>
+        </div>
+
+        <div class="form-group">
+            <label for="bloodType">Blood Type</label>
+            <select id="bloodType">
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="category">Blood Category</label>
+            <select id="category">
+                <option value="Whole Blood">Whole Blood</option>
+                <option value="Plasma">Plasma</option>
+                <option value="Platelets">Platelets</option>
+            </select>
+        </div>
+
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Results Table -->
+    <div id="bloodDataContainer">
+        <table id="bloodDataTable">
+            <thead>
+                <tr>
+                    <th>Blood Bank</th>
+                    <th>Category</th>
+                    <th>Availability</th>
+                    <th>Contact</th>
+                    <th>Last Updated</th>
+                    <th>Location</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody id="bloodDataBody">
+                <!-- Dynamic data will appear here -->
+            </tbody>
+        </table>
+    </div>
+</section>
+
+    <!-- Contact Us Section -->
+<div id="contact-section" class="contact-container">
+    <h2>Contact Us</h2>
+    <p>We're here to help you. Feel free to reach out to us.</p>
+<br><br>
+    <div class="contact-details">
+        <div class="contact-item">
+            <h3>📞 Phone</h3>
+            <p>+91 98765 43210</p>
+        </div>
+
+        <div class="contact-item">
+            <h3>✉️ Email</h3>
+            <p>support@bloodlink.com</p>
+        </div>
+
+        <div class="contact-item">
+            <h3>📍 Address</h3>
+            <p>123 BloodLink Street, Chennai, India</p>
+        </div>
+    </div>
+
+    <div class="contact-form">
+        <h3>Send Us a Message</h3>
+        <form>
+            <div class="input-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="Enter your name" required>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="input-group">
+                <label for="message">Message</label>
+                <textarea id="message" rows="4" placeholder="Enter your message" required></textarea>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+
+    
+<script>
+  
+          function formatDate(date) {
+            const options = { year: 'numeric', month: 'short', day: '2-digit' };
+            return date.toLocaleDateString('en-GB', options).replace(',', '');
+        }
+
+        function updateDate() {
+            const now = new Date();
+            const formattedDate = now.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+            const formattedTime = now.toTimeString().slice(0, 5);  // Format: HH:MM (no seconds)
+
+            document.getElementById('dateDisplay').innerHTML = `
+                <span class="bold-text">Data from 01 Jan 2022 onwards :</span>
+                <span class="normal-text">Last update: ${formattedDate} ${formattedTime}</span>
+            `;
+        }
+
+        setInterval(updateDate, 60000); // Updates every minute
+        updateDate(); // Initial call
+  
+  
+window.onload = function () {
+    // Initialize all features in one place
+    initTypingEffect();
+    initCarousel();
+    initBloodDataFetch();
+};
+
+// Typing Effect for Logo
+function initTypingEffect() {
+    const text = "BloodLink";
+    const speed = 250;
+    const delayBetweenLoops = 1000;
+    const logoElement = document.getElementById("logo");
+
+    function typeText() {
+        logoElement.innerHTML = "";
+        let index = 0;
+
+        function writeText() {
+            if (index < text.length) {
+                logoElement.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(writeText, speed);
+            } else {
+                setTimeout(typeText, delayBetweenLoops);
+            }
+        }
+        writeText();
+    }
+
+    typeText();
+}
+
+// Carousel Effect
+function initCarousel() {
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+
+    function showSlides() {
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[slideIndex].classList.add('active');
+        slideIndex = (slideIndex + 1) % slides.length;
+        setTimeout(showSlides, 4000);
+    }
+
+    showSlides();
+}
+
+// Blood Availability Fetch
+function initBloodDataFetch() {
+    document.getElementById('bloodSearchForm').addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const state = document.getElementById('state').value.trim();
+        const city = document.getElementById('city').value.trim();
+        const bloodType = document.getElementById('bloodType').value;
+        const category = document.getElementById('category').value;
+
+        const bloodDataBody = document.getElementById('bloodDataBody');
+        bloodDataBody.innerHTML = ''; // Clear previous data
+
+        try {
+            const response = await fetch(`https://www.eraktkosh.in/BLDAHIMS/bloodbank/stockAvailability.cnt?state=${state}&city=${city}&bloodGroup=${bloodType}&category=${category}`);
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch data. Please try again later.');
+            }
+
+            const data = await response.json();
+
+            if (data && data.length > 0) {
+                data.forEach((item, index) => {
+                    const row = `<tr>
+                        <td>${index + 1}</td>
+                        <td>${item.bloodBankName || 'N/A'}</td>
+                        <td>${item.category || 'N/A'}</td>
+                        <td>${item.availability || 'N/A'} units</td>
+                        <td>${item.lastUpdated || 'N/A'}</td>
+                        <td>${item.bloodType || 'N/A'}</td>
+                    </tr>`;
+                    bloodDataBody.innerHTML += row;
+                });
+            } else {
+                bloodDataBody.innerHTML = '<tr><td colspan="6">No results found. Try different criteria.</td></tr>';
+            }
+
+        } catch (error) {
+            bloodDataBody.innerHTML = '<tr><td colspan="6">Failed to load blood data. Please try again later.</td></tr>';
+            console.error("Error:", error);
+        }
+    });
+}
+
+ var Tawk_API = Tawk_API || {},
+      Tawk_LoadStart = new Date();
+
+  (function() {
+      var s1 = document.createElement("script"),
+          s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/67d5e4743bf812190d8bd665/1imdo8qjs';  <!-- Replace with the correct widget ID -->      s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin', '*');
+      s0.parentNode.insertBefore(s1, s0);
+  })();
+
+  // When the user sends a message to the Tawk.to widget
+  Tawk_API.onChatMessage = function(message) {
+      // Send message to your backend for AI processing
+      fetch('http://localhost:3000/ask', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: message })
+      })
+      .then(response => response.json())
+      .then(data => {
+          // Send GPT-4 response back to the Tawk.to chat widget
+          Tawk_API.addMessage(data.reply);
+      })
+      .catch(err => {
+          console.error('Error fetching AI response', err);
+      });
+  };
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
