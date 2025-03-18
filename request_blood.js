@@ -120,7 +120,7 @@ window.onload = function () {
         };
         
         try {
-            const response = await fetch("https://bloodlink-backend-dk99.onrender.com", {  
+            const response = await fetch("https://bloodlink-backend-dk99.onrender.com/api/requests", {  
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(requestData)
