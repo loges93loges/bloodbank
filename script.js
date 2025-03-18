@@ -49,33 +49,12 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebas
     // Fetch data on page load
     window.onload = fetchBloodCamps;
 
-
-
-// Carousel Effect
-function initCarousel() {
-    let slideIndex = 0;
-    const slides = document.querySelectorAll('.carousel-slide');
-
-    function showSlides() {
-        slides.forEach(slide => slide.classList.remove('active'));
-        slides[slideIndex].classList.add('active');
-        slideIndex = (slideIndex + 1) % slides.length;
-        setTimeout(showSlides, 4000);
-    }
-
-    showSlides();
-}
   
  // Smooth Scroll for Contact Section
    document.querySelector('a[href="#contact-section"]').addEventListener('click', function(event) {
     event.preventDefault();
     document.getElementById('contact-section').scrollIntoView({ behavior: 'smooth' });
 });
-
-
-
-
-
 
 // Password Strength Meter
 const passwordInput = document.getElementById("signup-password");
