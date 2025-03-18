@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const googleSignup = document.getElementById("googleSignup");
     const facebookSignup = document.getElementById("facebookSignup");
 
-    const BASE_URL = "https://bloodlink-backend-dk99.onrender.com";
+ const BASE_URL = "https://bloodlink-backend-dk99.onrender.com/api/auth";
 
     // Login Form Submission
     if (loginForm) {
