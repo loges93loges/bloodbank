@@ -120,7 +120,7 @@ window.onload = function () {
         };
         
         try {
-            const response = await fetch("http://localhost:5000/api/request-blood", {  // Add `/api/`
+            const response = await fetch("https://bloodlink-backend-dk99.onrender.com", {  
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(requestData)
