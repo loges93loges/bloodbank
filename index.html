@@ -256,6 +256,12 @@
 
     
 <script>
+
+function togglePopup() {
+    let popup = document.getElementById("popup");
+    popup.classList.toggle("show");
+}
+    
 const API_KEY = 'AIzaSyBYqBlu1sUMoSYQwekNbvcqJzWD8ncwXnQ'; 
 const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
 
@@ -387,19 +393,26 @@ function initTypingEffect() {
 }
 
 // Carousel Effect
-function initCarousel() {
-    let slideIndex = 0;
+    let currentSlide = 0;
     const slides = document.querySelectorAll('.carousel-slide');
+    const totalSlides = slides.length;
 
-    function showSlides() {
-        slides.forEach(slide => slide.classList.remove('active'));
-        slides[slideIndex].classList.add('active');
-        slideIndex = (slideIndex + 1) % slides.length;
-        setTimeout(showSlides, 4000);
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.style.display = i === index ? 'block' : 'none';
+        });
     }
 
-    showSlides();
-}
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        showSlide(currentSlide);
+    }
+
+    // Auto-slide every 3 seconds
+    setInterval(nextSlide, 3000);
+
+    // Show the first slide initially
+    showSlide(currentSlide);
 
 // Blood Availability Fetch
 function initBloodDataFetch() {
@@ -445,7 +458,21 @@ function initBloodDataFetch() {
         }
     });
 }
+function togglePopup() {
+    const popup = document.getElementById("campPopup");
+    const bell = document.querySelector(".bell-icon");
 
+    if (popup.style.display === "block") {
+        popup.style.display = "none";
+    } else {
+        popup.style.display = "block";
+
+        // Align the popup with the bell
+        let rect = bell.getBoundingClientRect();
+        popup.style.top = `${rect.bottom + 5}px`; // Position slightly below the bell
+        popup.style.right = "10px"; // Adjust if needed
+    }
+}
 </script>
 
 
