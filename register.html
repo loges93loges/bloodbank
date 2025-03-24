@@ -5,79 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donor Registration</title>
     <link rel="stylesheet" href="style.css">
-    <script type="module" src="register.js"></script>
 </head>
 <style>
     body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f7f8fc;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-}
+        font-family: 'Poppins', sans-serif;
+        background-color: #f7f8fc;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+    }
 
-.container {
-    width: 90%;
-    max-width: 400px;
-    background: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    animation: fadeIn 0.5s ease-in-out;
-}
+    .container {
+        width: 90%;
+        max-width: 400px;
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        animation: fadeIn 0.5s ease-in-out;
+    }
 
-h1 {
-    color: #D32F2F;
-    font-size: 24px;
-    margin-bottom: 15px;
-}
+    h1 {
+        color: #D32F2F;
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
 
-input, select, button {
-    padding: 12px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    width: 100%;
-}
+    input, select, button {
+        padding: 12px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        width: 100%;
+    }
 
-input:focus, select:focus {
-    border-color: #D32F2F;
-    outline: none;
-    box-shadow: 0 0 5px rgba(211, 47, 47, 0.5);
-}
+    input:focus, select:focus {
+        border-color: #D32F2F;
+        outline: none;
+        box-shadow: 0 0 5px rgba(211, 47, 47, 0.5);
+    }
 
-button {
-    background-color: #D32F2F;
-    color: white;
-    cursor: pointer;
-    border: none;
-    font-weight: bold;
-    transition: background 0.3s;
-}
+    button {
+        background-color: #D32F2F;
+        color: white;
+        cursor: pointer;
+        border: none;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
 
-button:hover {
-    background-color: #b71c1c;
-}
+    button:hover {
+        background-color: #b71c1c;
+    }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+    /* Disabled Button */
+    .disabled {
+        background-color: gray;
+        cursor: not-allowed;
+    }
 
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 </style>
 <body>
+
     <div class="container">
         <h1>Donor Registration</h1>
+        <p id="eligibilityStatus" style="color: red; font-weight: bold;"></p>
+        
         <form id="donorForm">
             <input type="text" id="donorName" placeholder="Full Name" required>
             <input type="number" id="donorAge" placeholder="Age" required>
@@ -101,10 +108,29 @@ button:hover {
             </select>
             <input type="tel" id="donorContact" placeholder="Contact Number" required>
             <input type="text" id="donorAvailability" placeholder="Availability (in hours)" required>
-            <button type="submit">Register</button>
+            <button id="registerButton" type="submit" class="disabled" disabled>Register</button>
         </form>
     </div>
-    <script type="module" src="register.js"></script>
 
+    <script>
+        // Check eligibility from localStorage
+        window.onload = function() {
+            let isEligible = localStorage.getItem("donorEligible");
+            let registerButton = document.getElementById("registerButton");
+            let eligibilityStatus = document.getElementById("eligibilityStatus");
+
+            if (isEligible === "true") {
+                registerButton.disabled = false;
+                registerButton.classList.remove("disabled");
+                eligibilityStatus.textContent = "✅ You are eligible to donate blood!";
+                eligibilityStatus.style.color = "green";
+            } else {
+                registerButton.disabled = true;
+                registerButton.classList.add("disabled");
+                eligibilityStatus.textContent = "❌ You have not completed the eligibility check or are not eligible.";
+            }
+        };
+    </script>
+<script type="module" src="register.js"></script>
 </body>
 </html>
