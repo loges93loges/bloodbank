@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donation Eligibility Check</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #c0392b;
+            margin-bottom: 10px;
+        }
+        .info {
+            text-align: left;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #fbeee6;
+            border-left: 5px solid #c0392b;
+            font-size: 16px;
+        }
+        .info ul {
+            padding-left: 20px;
+        }
+        h2 {
+            color: #c0392b;
+        }
+        .question {
+            margin: 20px 0;
+            font-size: 18px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .yes {
+            background: #27ae60;
+            color: white;
+        }
+        .no {
+            background: #e74c3c;
+            color: white;
+        }
+        .result {
+            display: none;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .eligible {
+            color: #2ecc71;
+            background: #d5f5e3;
+        }
+        .not-eligible {
+            color: #e74c3c;
+            background: #fadbd8;
+        }
+        .input-box {
+            display: none;
+            margin-top: 15px;
+        }
+        .input-box input {
+            width: 80%;
+            padding: 8px;
+            font-size: 16px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        @media (max-width: 600px) {
+            .buttons {
+                flex-direction: column;
+            }
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Blood Donation Eligibility Check</h1>
+        
+        <div class="info">
+            <p>Donating blood is a noble act that can save lives, but not everyone is eligible. To ensure safety, you must meet certain criteria before donating.</p>
+            <h3>General Requirements:</h3>
+            <ul>
+                <li>✔️ You must be at least <b>18 years old</b> and weigh <b>50 kg or more</b>.</li>
+                <li>✔️ You should not have donated blood in the past <b>3 months</b>.</li>
+                <li>✔️ You must not have consumed <b>alcohol in the last 24 hours</b>.</li>
+                <li>✔️ You should not have any <b>serious illness or infections</b>.</li>
+                <li>✔️ If taking medication, it should not interfere with blood donation.</li>
+                <li>✔️ Recent <b>vaccinations and travel</b> may affect eligibility.</li>
+            </ul>
+        </div>
+
+        <h2>Check Your Eligibility</h2>
+        <p>Answer the questions below to see if you qualify to donate blood.</p>
+
+        <div class="question" id="question-text">Are you above 18 years old?</div>
+        
+        <div class="buttons">
+            <button class="yes" onclick="nextQuestion(true)">Yes</button>
+            <button class="no" onclick="nextQuestion(false)">No</button>
+        </div>
+
+        <div class="input-box" id="input-box">
+            <input type="text" id="user-input" placeholder="Enter details">
+            <button onclick="submitInput()">Submit</button>
+        </div>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        let questions = [
+            { text: "Are you above 18 years old?", yesNext: 1, noNext: -1 },
+            { text: "Do you weigh at least 50 kg?", yesNext: 2, noNext: -1 },
+            { text: "Have you donated blood in the last 3 months?", yesNext: -1, noNext: 3 },
+            { text: "Have you consumed alcohol in the last 24 hours?", yesNext: 4, noNext: 5 },
+            { text: "When was your last drink? (Enter number of hours)", isInput: true, next: 5 },
+            { text: "Are you currently taking any medication?", yesNext: 6, noNext: 7 },
+            { text: "Is your medication prescribed for a serious illness?", yesNext: -1, noNext: 7 },
+            { text: "Have you had any vaccination in the last 4 weeks?", yesNext: -1, noNext: 8 },
+            { text: "Have you traveled to a malaria-prone area recently?", yesNext: -1, noNext: 9 },
+            { text: "Do you feel healthy today?", yesNext: 10, noNext: -1 },
+            { text: "You are eligible to donate blood! 🎉", yesNext: -2, noNext: -2 }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = {};
+
+        function nextQuestion(isYes) {
+            if (currentQuestion === -1) {
+                showResult(false);
+                return;
+            }
+
+            let nextIndex = isYes ? questions[currentQuestion].yesNext : questions[currentQuestion].noNext;
+
+            if (questions[currentQuestion].isInput) {
+                document.getElementById("input-box").style.display = "block";
+                document.getElementById("user-input").focus();
+                return;
+            }
+
+            if (nextIndex === -1) {
+                showResult(false);
+            } else if (nextIndex === -2) {
+                showResult(true);
+            } else {
+                document.getElementById("question-text").textContent = questions[nextIndex].text;
+                currentQuestion = nextIndex;
+            }
+        }
+
+        function submitInput() {
+            let inputValue = document.getElementById("user-input").value;
+            if (!inputValue) return;
+
+            userAnswers[currentQuestion] = inputValue;
+            document.getElementById("input-box").style.display = "none";
+            document.getElementById("user-input").value = "";
+
+            let nextIndex = questions[currentQuestion].next;
+            document.getElementById("question-text").textContent = questions[nextIndex].text;
+            currentQuestion = nextIndex;
+        }
+
+        function showResult(isEligible) {
+            document.querySelector(".buttons").style.display = "none";
+            document.getElementById("input-box").style.display = "none";
+
+            let resultBox = document.getElementById("result");
+            resultBox.style.display = "block";
+
+            resultBox.textContent = isEligible ? "🎉 You are eligible to donate blood!" : "❌ Sorry, you are not eligible to donate blood.";
+            resultBox.classList.add(isEligible ? "eligible" : "not-eligible");
+        }
+    </script>
+
+</body>
+</html>
