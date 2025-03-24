@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blood Donation Eligibility Check</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <style>
+     <style>
         body {
             font-family: Arial, sans-serif;
             background: #f9f9f9;
@@ -23,6 +23,17 @@
         h1 {
             color: #c0392b;
             margin-bottom: 10px;
+        }
+        .info {
+            text-align: left;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #fbeee6;
+            border-left: 5px solid #c0392b;
+            font-size: 16px;
+        }
+        .info ul {
+            padding-left: 20px;
         }
         h2 {
             color: #c0392b;
@@ -67,11 +78,43 @@
             color: #e74c3c;
             background: #fadbd8;
         }
+        .input-box {
+            display: none;
+            margin-top: 15px;
+        }
+        .input-box input {
+            width: 80%;
+            padding: 8px;
+            font-size: 16px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        @media (max-width: 600px) {
+            .buttons {
+                flex-direction: column;
+            }
+            button {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
+              <div class="info">
+          <p>Donating blood is a noble act that can save lives, but not everyone is eligible. To ensure safety, you must meet certain criteria before donating.</p>
+          <h3>General Requirements:</h3>
+          <ul style="list-style-type:none;">
+            <li>✔️ You must be at least <b>18 years old</b> and weigh <b>50 kg or more</b>.</li>
+            <li>✔️ You should not have donated blood in the past <b>3 months</b>.</li>
+            <li>✔️ You must not have consumed <b>alcohol in the last 24 hours</b>.</li>
+            <li>✔️ You should not have any <b>serious illness or infections</b>.</li>
+            <li>✔️ If taking medication, it should not interfere with blood donation.</li>
+            <li>✔️ Recent <b>vaccinations and travel</b> may affect eligibility.</li>
+          </ul>
+        </div>
         <h1>Blood Donation Eligibility Check</h1>
         <h2>Check Your Eligibility</h2>
         <p>Answer the questions below to see if you qualify to donate blood.</p>
