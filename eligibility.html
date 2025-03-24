@@ -1,145 +1,146 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blood Donation Eligibility Check</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f9f9f9;
-            text-align: center;
-            padding: 20px;
-        }
-        .container {
-            max-width: 700px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            color: #c0392b;
-            margin-bottom: 10px;
-        }
-        h2 {
-            color: #c0392b;
-        }
-        .question {
-            margin: 20px 0;
-            font-size: 18px;
-        }
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .yes {
-            background: #27ae60;
-            color: white;
-        }
-        .no {
-            background: #e74c3c;
-            color: white;
-        }
-        .result {
-            display: none;
-            margin-top: 20px;
-            font-size: 20px;
-            font-weight: bold;
-            padding: 15px;
-            border-radius: 5px;
-        }
-        .eligible {
-            color: #2ecc71;
-            background: #d5f5e3;
-        }
-        .not-eligible {
-            color: #e74c3c;
-            background: #fadbd8;
-        }
-    </style>
+    <title>Donor Registration</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f7f8fc;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 400px;
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    h1 {
+        color: #D32F2F;
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+
+    /* Eligibility Message */
+    #eligibilityStatus {
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    input, select, button {
+        padding: 12px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        width: 100%;
+    }
+
+    input:focus, select:focus {
+        border-color: #D32F2F;
+        outline: none;
+        box-shadow: 0 0 5px rgba(211, 47, 47, 0.5);
+    }
+
+    button {
+        background-color: #D32F2F;
+        color: white;
+        cursor: pointer;
+        border: none;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+
+    button:hover {
+        background-color: #b71c1c;
+    }
+
+    /* Disabled Button */
+    .disabled {
+        background-color: gray;
+        cursor: not-allowed;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
 <body>
 
     <div class="container">
-        <h1>Blood Donation Eligibility Check</h1>
-        <h2>Check Your Eligibility</h2>
-        <p>Answer the questions below to see if you qualify to donate blood.</p>
-
-        <div class="question" id="question-text">Are you above 18 years old?</div>
+        <h1>Donor Registration</h1>
         
-        <div class="buttons">
-            <button class="yes" onclick="nextQuestion(true)">Yes</button>
-            <button class="no" onclick="nextQuestion(false)">No</button>
-        </div>
+        <!-- Eligibility Status Message -->
+        <p id="eligibilityStatus">Checking eligibility...</p>
 
-        <div class="result" id="result"></div>
-
-        <button id="goToRegister" onclick="goToRegistration()" style="margin-top:20px; padding:10px 20px; font-size:16px; display:none;">
-            Proceed to Donor Registration
-        </button>
+        <form id="donorForm">
+            <input type="text" id="donorName" placeholder="Full Name" required>
+            <input type="number" id="donorAge" placeholder="Age" required>
+            <select id="donorGender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            <input type="text" id="donorAddress" placeholder="Address" required>
+            <select id="donorBloodGroup" required>
+                <option value="">Select Blood Group</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+            </select>
+            <input type="tel" id="donorContact" placeholder="Contact Number" required>
+            <input type="text" id="donorAvailability" placeholder="Availability (in hours)" required>
+            <button id="registerButton" type="submit" class="disabled" disabled>Register</button>
+        </form>
     </div>
 
     <script>
-        let questions = [
-            { text: "Are you above 18 years old?", yesNext: 1, noNext: -1 },
-            { text: "Do you weigh at least 50 kg?", yesNext: 2, noNext: -1 },
-            { text: "Have you donated blood in the last 3 months?", yesNext: -1, noNext: 3 },
-            { text: "Have you consumed alcohol in the last 24 hours?", yesNext: 4, noNext: 5 },
-            { text: "When was your last drink? (Enter number of hours)", isInput: true, next: 5 },
-            { text: "Are you currently taking any medication?", yesNext: 6, noNext: 7 },
-            { text: "Is your medication prescribed for a serious illness?", yesNext: -1, noNext: 7 },
-            { text: "Have you had any vaccination in the last 4 weeks?", yesNext: -1, noNext: 8 },
-            { text: "Have you traveled to a malaria-prone area recently?", yesNext: -1, noNext: 9 },
-            { text: "Do you feel healthy today?", yesNext: 10, noNext: -1 },
-            { text: "You are eligible to donate blood! 🎉", yesNext: -2, noNext: -2 }
-        ];
+        // Check eligibility from localStorage
+        window.onload = function() {
+            let isEligible = localStorage.getItem("donorEligible");
+            let registerButton = document.getElementById("registerButton");
+            let eligibilityStatus = document.getElementById("eligibilityStatus");
 
-        let currentQuestion = 0;
-
-        function nextQuestion(isYes) {
-            let nextIndex = isYes ? questions[currentQuestion].yesNext : questions[currentQuestion].noNext;
-
-            if (nextIndex === -1) {
-                showResult(false);
-            } else if (nextIndex === -2) {
-                showResult(true);
+            if (isEligible === "true") {
+                registerButton.disabled = false;
+                registerButton.classList.remove("disabled");
+                eligibilityStatus.textContent = "✅ You are eligible to donate blood!";
+                eligibilityStatus.style.color = "green";
             } else {
-                document.getElementById("question-text").textContent = questions[nextIndex].text;
-                currentQuestion = nextIndex;
+                registerButton.disabled = true;
+                registerButton.classList.add("disabled");
+                eligibilityStatus.textContent = "❌ You have not completed the eligibility check or are not eligible.";
+                eligibilityStatus.style.color = "red";
             }
-        }
-
-        function showResult(isEligible) {
-            document.querySelector(".buttons").style.display = "none";
-
-            let resultBox = document.getElementById("result");
-            resultBox.style.display = "block";
-            resultBox.textContent = isEligible ? "🎉 You are eligible to donate blood!" : "❌ Sorry, you are not eligible to donate blood.";
-            resultBox.classList.add(isEligible ? "eligible" : "not-eligible");
-
-            if (isEligible) {
-                localStorage.setItem("donorEligible", "true");
-                document.getElementById("goToRegister").style.display = "block";
-            } else {
-                localStorage.setItem("donorEligible", "false");
-            }
-        }
-
-        function goToRegistration() {
-            window.location.href = "register.html";
-        }
+        };
     </script>
-
+<script type="module" src="register.js"></script>
 </body>
 </html>
